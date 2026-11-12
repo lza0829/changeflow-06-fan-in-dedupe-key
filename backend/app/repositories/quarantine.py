@@ -19,15 +19,21 @@ def insert(
     entity_key: str,
     reason: str,
     payload: dict[str, Any],
-) -> None:
-    conn.execute(
+    batch_id: int | None = None,
+    candidate_id: int | None = None,
+) -> int:
+    cur = conn.execute(
         """
-        INSERT INTO quarantine(stream_id, run_id, seq, entity_key, reason, payload_json, created_at)
-        VALUES (?,?,?,?,?,?,?)
+        INSERT INTO quarantine(
+            stream_id, run_id, batch_id, candidate_id, seq, entity_key, reason,
+            payload_json, created_at
+        ) VALUES (?,?,?,?,?,?,?,?,?)
         """,
         (
             stream_id,
             run_id,
+            batch_id,
+            candidate_id,
             seq,
             entity_key,
             reason,
@@ -35,12 +41,14 @@ def insert(
             _now(),
         ),
     )
+    return int(cur.lastrowid)
 
 
 def list_quarantine(conn: sqlite3.Connection) -> list[dict[str, Any]]:
     rows = conn.execute(
         """
-        SELECT id, stream_id, run_id, seq, entity_key, reason, payload_json, created_at
+        SELECT id, stream_id, run_id, batch_id, candidate_id, seq, entity_key, reason,
+               payload_json, created_at
         FROM quarantine ORDER BY id DESC
         """
     ).fetchall()
@@ -54,3 +62,4 @@ def list_quarantine(conn: sqlite3.Connection) -> list[dict[str, Any]]:
 
 def count_quarantine(conn: sqlite3.Connection) -> int:
     return int(conn.execute("SELECT COUNT(*) c FROM quarantine").fetchone()["c"])
+

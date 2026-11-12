@@ -25,6 +25,6 @@ onMounted(async () => {
       <div class="tile"><div class="hero-num">{{ stats.quarantine_count }}</div><div class="muted">隔离</div></div>
       <div class="tile"><div class="hero-num">{{ stats.run_count }}</div><div class="muted">Apply Runs</div></div>
     </div>
-    <router-link to="/apply">去应用台跑一趟 →</router-link>
+    <p><router-link to="/fan-in">去汇入去重台跑一次多入口批次 →</router-link> · <router-link to="/apply">或单流应用台</router-link></p>
   </div>
 </template>

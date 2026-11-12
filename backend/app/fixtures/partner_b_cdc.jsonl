@@ -1,0 +1,4 @@
+{"seq":1,"op":"upsert","entity_key":"ORD-3001","event_ts":"2026-11-02T09:03:00Z","revision":3,"payload":{"status":"paid","amount":199.0,"channel":"B"}}
+{"seq":2,"op":"upsert","entity_key":"ORD-3002","event_ts":"2026-11-02T09:04:00Z","revision":1,"payload":{"status":"paid","amount":58.0,"channel":"B"}}
+{"seq":3,"op":"upsert","entity_key":"ORD-3003","event_ts":"2026-11-02T09:05:00Z","revision":2,"payload":{"status":"shipped","amount":72.5,"channel":"B"}}
+{"seq":5,"op":"upsert","entity_key":"ORD-3005","event_ts":"2026-11-02T09:06:00Z","revision":1,"payload":{"status":"created","amount":31.0,"channel":"B"}}

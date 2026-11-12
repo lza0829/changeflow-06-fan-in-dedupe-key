@@ -1,10 +1,21 @@
 from fastapi import APIRouter
 
-from app.routers import apply, cursors, dashboard, ledger, quarantine, settings, sink, streams
+from app.routers import (
+    apply,
+    cursors,
+    dashboard,
+    fan_in,
+    ledger,
+    quarantine,
+    settings,
+    sink,
+    streams,
+)
 
 api = APIRouter(prefix="/api")
 api.include_router(dashboard.router)
 api.include_router(streams.router)
+api.include_router(fan_in.router)
 api.include_router(apply.router)
 api.include_router(ledger.router)
 api.include_router(quarantine.router)

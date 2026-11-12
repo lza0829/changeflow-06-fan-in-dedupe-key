@@ -11,19 +11,21 @@ onMounted(async () => { rows.value = await getJSON('/api/quarantine') })
     <div class="panel">
       <table>
         <thead>
-          <tr><th>ID</th><th>流</th><th>run</th><th>seq</th><th>entity</th><th>reason</th><th>时间</th></tr>
+          <tr><th>ID</th><th>流</th><th>run</th><th>batch</th><th>candidate</th><th>seq</th><th>entity</th><th>reason</th><th>时间</th></tr>
         </thead>
         <tbody>
           <tr v-for="r in rows" :key="r.id">
             <td>{{ r.id }}</td>
             <td>{{ r.stream_id }}</td>
             <td>{{ r.run_id }}</td>
+            <td>{{ r.batch_id ?? '—' }}</td>
+            <td>{{ r.candidate_id ?? '—' }}</td>
             <td>{{ r.seq }}</td>
             <td>{{ r.entity_key }}</td>
             <td>{{ r.reason }}</td>
             <td>{{ r.created_at }}</td>
           </tr>
-          <tr v-if="!rows.length"><td colspan="7" class="muted">暂无隔离记录</td></tr>
+          <tr v-if="!rows.length"><td colspan="9" class="muted">暂无隔离记录</td></tr>
         </tbody>
       </table>
     </div>

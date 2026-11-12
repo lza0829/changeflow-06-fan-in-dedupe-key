@@ -29,6 +29,7 @@ def parse_change_fixture(path: Path) -> list[dict[str, Any]]:
                 "op": op,
                 "entity_key": str(obj["entity_key"]),
                 "event_ts": str(obj["event_ts"]),
+                "revision": int(obj.get("revision") or 0),
                 "payload": obj.get("payload") or {},
             }
         )

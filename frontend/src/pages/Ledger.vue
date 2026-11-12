@@ -11,14 +11,18 @@ onMounted(async () => { rows.value = await getJSON('/api/ledger') })
     <div class="panel">
       <table>
         <thead>
-          <tr><th>ID</th><th>流</th><th>run</th><th>seq</th><th>op</th><th>entity</th><th>disposition</th><th>event_ts</th></tr>
+          <tr><th>ID</th><th>流</th><th>run</th><th>batch</th><th>入口</th><th>seq</th><th>merge#</th><th>apply#</th><th>op</th><th>entity</th><th>disposition</th><th>event_ts</th></tr>
         </thead>
         <tbody>
           <tr v-for="r in rows" :key="r.id">
             <td>{{ r.id }}</td>
             <td>{{ r.stream_id }}</td>
             <td>{{ r.run_id }}</td>
+            <td>{{ r.batch_id ?? '—' }}</td>
+            <td>{{ r.entry_id || '—' }}</td>
             <td>{{ r.seq }}</td>
+            <td>{{ r.merge_seq ?? '—' }}</td>
+            <td>{{ r.apply_seq ?? '—' }}</td>
             <td>{{ r.op }}</td>
             <td>{{ r.entity_key }}</td>
             <td>{{ r.disposition }}</td>
